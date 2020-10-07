@@ -1,6 +1,8 @@
+"""
+线性回归之最小二乘法
+"""
 import numpy as np
 from sklearn import linear_model
-
 
 class LinearRegression(object):
     def __init__(self):
@@ -39,14 +41,14 @@ if __name__=='__main__':
     lr.fit(X,y)
     X_test=np.array([[1.3,1,3.2],[-1.2,1.2,0.8]])
     y_pre=lr.predict(X_test)
-    print(y_pre)
+    print("tiny_implement:",y_pre)
 
     sklearn_lr=linear_model.LinearRegression()
     sklearn_lr.fit(X,y)
     sklearn_y_pre=sklearn_lr.predict(X_test)
-    print(sklearn_y_pre)
+    print("sklearn_线性回归：",sklearn_y_pre)
 
     ridge_reg = linear_model.Ridge(alpha=0., solver='lsqr')
     ridge_reg.fit(X, y)
     ridge_y_pre=ridge_reg.predict(X_test)
-    print(ridge_y_pre)
+    print("sklearn_岭回归：",ridge_y_pre)

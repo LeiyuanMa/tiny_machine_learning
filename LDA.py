@@ -1,3 +1,6 @@
+"""
+线性判别分析
+"""
 from sklearn import discriminant_analysis
 import numpy as np
 from sklearn.datasets import load_breast_cancer
@@ -60,7 +63,7 @@ if __name__=='__main__':
     lda_pred = lda.predict(X_test)
     #print('tinyml lda_prob:', lda_prob)
     #print('tinyml lda_pred:', lda_pred)
-    print('tinyml accuracy:', len(y_test[y_test == lda_pred]) * 1. / len(y_test))
+    print('tiny_implement accuracy:', len(y_test[y_test == lda_pred]) * 1. / len(y_test))
 
 
     sklearn_lda = discriminant_analysis.LinearDiscriminantAnalysis()

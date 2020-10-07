@@ -1,3 +1,6 @@
+"""
+逻辑回归，实为分类算法
+"""
 import numpy as np
 from sklearn import linear_model
 from sklearn.datasets import load_breast_cancer

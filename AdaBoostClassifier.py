@@ -1,7 +1,7 @@
 """
 只针对2分类
 自己实现的DecisionTreeClassifier没有实现 sample_weight参数
-重点在AdaBoost， 使用sklearn的DecisionTreeClassifier作为基学习器
+重点在AdaBoost,使用sklearn的DecisionTreeClassifier作为基学习器
 """
 import numpy as np
 import copy
@@ -15,7 +15,6 @@ class AdaBoostClassifier:
         self.n_estimators = n_estimators
         self.method=method
         self.hs_ = []
-        self.epsilons_ = []
         self.alphas_ = []
         self.Ds_ = []
 
@@ -37,15 +36,10 @@ class AdaBoostClassifier:
             if epsilon_t > 0.5:
                 break
             self.hs_.append(copy.copy(ht))
-            self.epsilons_.append(epsilon_t)
             alpha_t = 0.5 * np.log((1 - epsilon_t) / epsilon_t)
             self.alphas_.append(alpha_t)
             self.Ds_.append(self.Ds_[t] * np.exp(-alpha_t * y * y_pred))
             self.Ds_[t + 1] = self.Ds_[t + 1] / np.sum(self.Ds_[t + 1])
-
-    @classmethod
-    def calc_epsilon(clf, D, y_target, y_pred):
-        return 1 - np.sum(D[y_target == y_pred])
 
     def predict(self, X):
         H=np.zeros((X.shape[0],))
@@ -67,13 +61,11 @@ if __name__ == '__main__':
     y_pred_decison_tree = sklearn_decision_tree.predict(X_test)
     print('single decision tree:', len(y_test[y_pred_decison_tree == y_test]) * 1.0 / len(y_test))
 
-    print('tinyml:')
     adaboost_clf = AdaBoostClassifier(n_estimators=100,base_estimator=base_estimator,method='re-weighting')
     adaboost_clf.fit(X_train, y_train)
     y_pred = adaboost_clf.predict(X_test)
-    print('adaboost y_pred:', len(y_test[y_pred == y_test]) * 1. / len(y_test))
+    print('tiny_implement adaboost y_pred:', len(y_test[y_pred == y_test]) * 1. / len(y_test))
 
-    print('sklearn:')
     sklearn_adboost_clf = sklearnAdaBoostClassifier(n_estimators=100, random_state=False, algorithm='SAMME',
                                                     base_estimator=base_estimator)
     sklearn_adboost_clf.fit(X_train, y_train)

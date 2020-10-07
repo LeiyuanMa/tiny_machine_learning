@@ -1,3 +1,6 @@
+"""
+PCA降维，SVD分解
+"""
 import numpy as np
 
 class PCA:
@@ -36,11 +39,11 @@ if __name__=='__main__':
 
     pca=PCA(d_=2)
     Z=pca.fit_transform(X)
-    print(Z)
+    print("tiny_implement:",Z)
 
     import sklearn.decomposition as decomposition
     sklearn_PCA=decomposition.PCA(n_components=2,svd_solver='full')
     Z2=sklearn_PCA.fit_transform(X)
-    print(Z2)
+    print("sklearn:",Z2)
 
     print('diff:',np.sum((Z-Z2)**2))

@@ -1,3 +1,6 @@
+"""
+朴素贝叶斯分类器（属性条件独立性假设）
+"""
 import numpy as np
 from utils.dataset import dataSet
 # 只考虑离散值

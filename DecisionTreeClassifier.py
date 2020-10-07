@@ -1,11 +1,12 @@
-import numpy as np
 """
 简单的决策树实现，算法参考 周志华《机器学习》一书
 只处理离散值，不考虑缺失值
 """
+import numpy as np
 from utils.treePlotter import createPlot
 from utils.dataset import dataSet
 np.random.seed(100)
+
 class DecisionTreeClassifier:
     """
     决策树分类
@@ -107,7 +108,6 @@ class DecisionTreeClassifier:
         return tree
 
 
-
     @classmethod
     def Ent(cls,D):
         """
@@ -203,7 +203,7 @@ class DecisionTreeClassifier:
 
 if __name__=='__main__':
     watermelon_data, label, X_test = dataSet()
-    decision_clf=DecisionTreeClassifier(tree_type='ID3')
+    decision_clf=DecisionTreeClassifier(tree_type='C45')
     decision_clf.fit(watermelon_data,label)
     print(decision_clf.tree)
     createPlot(decision_clf.tree)

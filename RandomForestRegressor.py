@@ -1,3 +1,6 @@
+"""
+随机森林，使用sklearn的DecisionTreeClassifier作为基学习器
+"""
 import numpy as np
 from sklearn import datasets,ensemble,tree
 from sklearn.metrics import mean_squared_error

@@ -1,3 +1,6 @@
+"""
+《统计学习方法》 p69 最小二乘回归树
+"""
 import numpy as np
 from utils import treePlotter
 import sklearn.datasets as datasets
@@ -5,10 +8,8 @@ from sklearn.metrics import mean_squared_error
 import sklearn.tree as tree
 import graphviz
 import math
+
 class DecisionTreeRegressor:
-    """
-    《统计学习方法》 p69 最小二乘回归树
-    """
     def __init__(self, min_samples_split=3,min_samples_leaf=1,random_state=False):
         self.min_samples_split=min_samples_split
         self.min_samples_leaf=min_samples_leaf
@@ -79,8 +80,8 @@ class DecisionTreeRegressor:
         D_left, D_right = {},{}
         D_left['X'],D_left['y'] = X[left_indices],y[left_indices]
         D_right['X'],D_right['y']=X[right_indices],y[right_indices]
-        tree[split_j]['l'+str(split_s)]=self.TreeGenerate(D_left,A)
-        tree[split_j]['r'+str(split_s)]=self.TreeGenerate(D_right,A)
+        tree[split_j]['L'+str(split_s)]=self.TreeGenerate(D_left,A)
+        tree[split_j]['R'+str(split_s)]=self.TreeGenerate(D_right,A)
         # 当前节点值
         tree[split_j]['val']=math.ceil(np.mean(y))
         return tree
@@ -92,11 +93,10 @@ if __name__=='__main__':
     X_train, y_train = X[:200], y[:200]
     X_test, y_test = X[200:], y[200:]
 
-
     decisiontree_reg=DecisionTreeRegressor(min_samples_split=20,min_samples_leaf=5)
     decisiontree_reg.fit(X_train,y_train)
     print(decisiontree_reg.tree)
-    treePlotter.createPlot(decisiontree_reg.tree)
+    # treePlotter.createPlot(decisiontree_reg.tree)
     y_pred=decisiontree_reg.predict(X_test)
     print('tinyml mse:',mean_squared_error(y_test,y_pred))
 
@@ -106,5 +106,8 @@ if __name__=='__main__':
     print(sklearn_reg.feature_importances_)
     sklearn_pred=sklearn_reg.predict(X_test)
     print('sklearn mse:',mean_squared_error(y_test,sklearn_pred))
-    dot_data=tree.export_graphviz(sklearn_reg,out_file=None)
-    graph=graphviz.Source(dot_data)
+    # dot_data=tree.export_graphviz(sklearn_reg,out_file=None)
+    # graph=graphviz.Source(dot_data)
+
+
+

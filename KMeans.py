@@ -1,3 +1,6 @@
+"""
+KMeans方法及进阶
+"""
 import numpy as np
 import random
 import matplotlib.pyplot as plt
@@ -74,20 +77,20 @@ if __name__=='__main__':
 
     kmeans=m_KMeans(k=3)
     kmeans.fit(X)
-    print(kmeans.C)
-    print(kmeans.labels_)
-    print(kmeans.predict(X))
+    print('tiny_implement, center:',kmeans.C)
+    print('labels:',kmeans.labels_)
+    print('tiny_implement, predict:',kmeans.predict(X))
     plt.figure(12)
     plt.subplot(121)
     plt.scatter(X[:,0],X[:,1],c=kmeans.labels_)
     plt.scatter(kmeans.mu[:,0],kmeans.mu[:,1],c=range(kmeans.k),marker='+')
-    plt.title('tinyml')
+    plt.title('tiny_implement')
 
     sklearn_kmeans=KMeans(n_clusters=3)
     sklearn_kmeans.fit(X)
-    print(sklearn_kmeans.labels_)
+    print('sklearn, predict:',sklearn_kmeans.labels_)
     plt.subplot(122)
-    plt.scatter(X[:,0],X[:,1],c=sklearn_kmeans.labels_,marker='*')
+    plt.scatter(X[:,0],X[:,1],c=sklearn_kmeans.labels_)
     plt.title('sklearn')
     plt.show()
 
